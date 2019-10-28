@@ -108,18 +108,18 @@ int main(void)
 
 
 	// increment wr pointer and test empty/full
-	printf("empty [%d], full [%d]\n", is_empty(), is_full());
+	printf("empty [%d], full [%d]\n", ((int) is_empty()), ((int) is_full()));
 	fifo_ptr_inc(&fifo_ptr_wr);
-	printf("empty [%d], full [%d]\n", is_empty(), is_full());
+	printf("empty [%d], full [%d]\n", ((int) is_empty()), ((int) is_full()));
 	fifo_ptr_inc(&fifo_ptr_rd);
-	printf("empty [%d], full [%d]\n", is_empty(), is_full());
+	printf("empty [%d], full [%d]\n", ((int) is_empty()), ((int) is_full()));
 
 	for (x = 0; x < 20; x++) {
 		fifo_ptr_inc(&fifo_ptr_wr);
-		printf("empty [%d], full [%d] ", is_empty(), is_full());
+		printf("empty [%d], full [%d] ", ((int) is_empty()), ((int) is_full()));
 		printf("rd, wr: [%d, %d]\n", fifo_ptr_rd, fifo_ptr_wr);
 	}
-	printf("empty [%d], full [%d]\n", is_empty(), is_full());
+	printf("empty [%d], full [%d]\n", ((int) is_empty()), ((int) is_full()));
 	clear();
 
 
@@ -129,9 +129,9 @@ int main(void)
 	uint8_t data[8] = {1, 2, 3, 4, 5, 6, 7, 8};
 	uint8_t data_nb = 4;
 
-	printf("before push: empty [%d], full [%d]\n", is_empty(), is_full());
+	printf("before push: empty [%d], full [%d]\n", ((int) is_empty()), ((int) is_full()));
 	push(id, &data[0], data_nb);
-	printf("after push:  empty [%d], full [%d]\n", is_empty(), is_full());
+	printf("after push:  empty [%d], full [%d]\n", ((int) is_empty()), ((int) is_full()));
 
 
 	// test one pop
@@ -140,7 +140,7 @@ int main(void)
 	data_nb = 4;
 
 	pop(&id, &data[0], &data_nb);
-	printf("after pop:  empty [%d], full [%d]\n", is_empty(), is_full());
+	printf("after pop:  empty [%d], full [%d]\n", ((int) is_empty()), ((int) is_full()));
 	printf("pop values: id [%x], data = {%d, %d, %d, %d, %d, %d, %d, %d}, data_nb = [%d]\n"
 			, id
 			, data[0]
@@ -168,13 +168,13 @@ int main(void)
 	data[7] = 8;
 	data_nb = 8;
 
-	printf("before push: empty [%d], full [%d]\n", is_empty(), is_full());
+	printf("before push: empty [%d], full [%d]\n", ((int) is_empty()), ((int) is_full()));
 	push(id, &data[0], data_nb);
 
 	id = 0x00FC;
 	data_nb = 4;
 	push(id, &data[0], data_nb);
-	printf("after push:  empty [%d], full [%d]\n", is_empty(), is_full());
+	printf("after push:  empty [%d], full [%d]\n", ((int) is_empty()), ((int) is_full()));
 
 
 
@@ -214,7 +214,7 @@ int main(void)
 			, data_nb
 			);
 
-	printf("after pop:  empty [%d], full [%d]\n", is_empty(), is_full());
+	printf("after pop:  empty [%d], full [%d]\n", ((int) is_empty()), ((int) is_full()));
 
 
 	return 0;
