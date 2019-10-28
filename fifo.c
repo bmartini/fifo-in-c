@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <string.h>
 
 
@@ -25,11 +26,11 @@ void fifo_ptr_inc(int *index) {
 	}
 }
 
-int is_empty() {
+bool is_empty() {
 	return (fifo_ptr_rd == fifo_ptr_wr);
 }
 
-int is_full() {
+bool is_full() {
 	return ((fifo_ptr_rd != fifo_ptr_wr) && ((fifo_ptr_rd%MAX) == (fifo_ptr_wr%MAX)));
 }
 
