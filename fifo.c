@@ -76,11 +76,13 @@ int pop(uint16_t *id, uint8_t *data, uint8_t *data_nb) {
 
 int main(void)
 {
+	int x;
 	clear();
 
 	// increment wr pointer
 	printf("[%d, %d]", fifo_ptr_wr, (fifo_ptr_wr%MAX));
-	for (int x = 0; x < 20; x++) {
+
+	for (x = 0; x < 20; x++) {
 		fifo_ptr_inc(&fifo_ptr_wr);
 		printf(", [%d, %d]", fifo_ptr_wr, (fifo_ptr_wr%MAX));
 	}
@@ -89,7 +91,7 @@ int main(void)
 
 	// increment rd pointer
 	printf("[%d, %d]", fifo_ptr_rd, (fifo_ptr_rd%MAX));
-	for (int x = 0; x < 20; x++) {
+	for (x = 0; x < 20; x++) {
 		fifo_ptr_inc(&fifo_ptr_rd);
 		printf(", [%d, %d]", fifo_ptr_rd, (fifo_ptr_rd%MAX));
 	}
@@ -112,7 +114,7 @@ int main(void)
 	fifo_ptr_inc(&fifo_ptr_rd);
 	printf("empty [%d], full [%d]\n", is_empty(), is_full());
 
-	for (int x = 0; x < 20; x++) {
+	for (x = 0; x < 20; x++) {
 		fifo_ptr_inc(&fifo_ptr_wr);
 		printf("empty [%d], full [%d] ", is_empty(), is_full());
 		printf("rd, wr: [%d, %d]\n", fifo_ptr_rd, fifo_ptr_wr);
