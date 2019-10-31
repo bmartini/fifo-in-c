@@ -15,12 +15,12 @@ struct fifo_packet {
 };
 
 
-struct fifo_packet fifo[DEPTH];
-int fifo_ptr_rd = 0;
-int fifo_ptr_wr = 0;
+static struct fifo_packet fifo[DEPTH];
+static int fifo_ptr_rd = 0;
+static int fifo_ptr_wr = 0;
 
 
-void fifo_ptr_inc(int *index) {
+static void fifo_ptr_inc(int *index) {
 	(*index)++;
 
 	if (*index >= (2*DEPTH)) {
