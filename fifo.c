@@ -49,7 +49,7 @@ int push(uint16_t id, uint8_t *data, uint8_t data_nb) {
 	int index = (fifo_ptr_wr%DEPTH);
 
 	fifo[index].id = id;
-	memcpy(fifo[index].data, data, data_nb);
+	memmove(fifo[index].data, data, data_nb);
 	fifo[index].data_nb = data_nb;
 
 	fifo_ptr_inc(&fifo_ptr_wr);
@@ -66,7 +66,7 @@ int pop(uint16_t *id, uint8_t *data, uint8_t *data_nb) {
 
 	*id = fifo[index].id;
 	*data_nb = fifo[index].data_nb;
-	memcpy(data, fifo[index].data, *data_nb);
+	memmove(data, fifo[index].data, *data_nb);
 
 	fifo_ptr_inc(&fifo_ptr_rd);
 
