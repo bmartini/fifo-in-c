@@ -4,7 +4,7 @@
 #include <string.h>
 
 
-#define MAX 10
+#define DEPTH 10
 
 struct fifo_packet {
 	uint16_t id;
@@ -13,7 +13,7 @@ struct fifo_packet {
 };
 
 
-struct fifo_packet fifo[MAX];
+struct fifo_packet fifo[DEPTH];
 int fifo_ptr_rd = 0;
 int fifo_ptr_wr = 0;
 
@@ -21,7 +21,7 @@ int fifo_ptr_wr = 0;
 void fifo_ptr_inc(int *index) {
 	(*index)++;
 
-	if (*index >= (2*MAX)) {
+	if (*index >= (2*DEPTH)) {
 		*index = 0;
 	}
 }
@@ -31,7 +31,7 @@ bool is_empty() {
 }
 
 bool is_full() {
-	return ((fifo_ptr_rd != fifo_ptr_wr) && ((fifo_ptr_rd%MAX) == (fifo_ptr_wr%MAX)));
+	return ((fifo_ptr_rd != fifo_ptr_wr) && ((fifo_ptr_rd%DEPTH) == (fifo_ptr_wr%DEPTH)));
 }
 
 void clear() {
@@ -44,7 +44,7 @@ int push(uint16_t id, uint8_t *data, uint8_t data_nb) {
 		return 0;
 	}
 
-	int index = (fifo_ptr_wr%MAX);
+	int index = (fifo_ptr_wr%DEPTH);
 
 	fifo[index].id = id;
 	memcpy(fifo[index].data, data, data_nb);
@@ -60,7 +60,7 @@ int pop(uint16_t *id, uint8_t *data, uint8_t *data_nb) {
 		return 0;
 	}
 
-	int index = (fifo_ptr_rd%MAX);
+	int index = (fifo_ptr_rd%DEPTH);
 
 	*id = fifo[index].id;
 	*data_nb = fifo[index].data_nb;
@@ -80,20 +80,20 @@ int main(void)
 	clear();
 
 	// increment wr pointer
-	printf("[%d, %d]", fifo_ptr_wr, (fifo_ptr_wr%MAX));
+	printf("[%d, %d]", fifo_ptr_wr, (fifo_ptr_wr%DEPTH));
 
 	for (x = 0; x < 20; x++) {
 		fifo_ptr_inc(&fifo_ptr_wr);
-		printf(", [%d, %d]", fifo_ptr_wr, (fifo_ptr_wr%MAX));
+		printf(", [%d, %d]", fifo_ptr_wr, (fifo_ptr_wr%DEPTH));
 	}
 	printf("\n");
 
 
 	// increment rd pointer
-	printf("[%d, %d]", fifo_ptr_rd, (fifo_ptr_rd%MAX));
+	printf("[%d, %d]", fifo_ptr_rd, (fifo_ptr_rd%DEPTH));
 	for (x = 0; x < 20; x++) {
 		fifo_ptr_inc(&fifo_ptr_rd);
-		printf(", [%d, %d]", fifo_ptr_rd, (fifo_ptr_rd%MAX));
+		printf(", [%d, %d]", fifo_ptr_rd, (fifo_ptr_rd%DEPTH));
 	}
 	printf("\n");
 
