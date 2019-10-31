@@ -1,6 +1,8 @@
-#include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include "fifo.h"
+
+#include <stdio.h>
 #include <string.h>
 
 
@@ -73,6 +75,7 @@ int pop(uint16_t *id, uint8_t *data, uint8_t *data_nb) {
 
 
 
+#if 0
 
 int main(void)
 {
@@ -219,3 +222,5 @@ int main(void)
 
 	return 0;
 }
+
+#endif
